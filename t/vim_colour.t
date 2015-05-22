@@ -7,12 +7,25 @@ BEGIN { @*INC.unshift( 'lib' ) }
 use Test;
 use Text::VimColour;
 
-plan 1;
+plan 5;
 
 my $lang = 'perl6';
 my $in = 't/vim_colour.t';
 my $out = 't/index.html';
 
-Text::VimColour.new( :$lang, :$in, :$out ) ;
+unlink $out if $out.IO.f;
 
-ok slurp($out) ~~ /vimCodeElement/, 'found vimCodeElement';
+Text::VimColour.new( :$lang, :$in, :$out ) ;
+ok $out.IO.e && slurp($out) ~~ /vimCodeElement/, 'found vimCodeElement';
+
+my $c = Text::VimColour.new(:$lang, :$in);
+ok $c.html ~~ /vimCodeElement/, 'to temp file';
+
+my $x = Text::VimColour.new(:lang('perl6'), code => 'use v6; BEGIN {}; ');
+ok $x.html-full-page ~~ /vimCodeElement/, 'from string';
+
+ok $x.html ~~ /vimCodeElement/, 'body';
+
+ok $x.css ~~ /background/, 'css';
+
+
