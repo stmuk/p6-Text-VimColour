@@ -7,7 +7,7 @@ BEGIN { @*INC.unshift( 'lib' ) }
 use Test;
 use Text::VimColour;
 
-plan 5;
+plan 6;
 
 my $lang = 'perl6';
 my $in = 't/vim_colour.t';
@@ -25,7 +25,10 @@ my $x = Text::VimColour.new(:lang('perl6'), code => 'use v6; BEGIN {}; ');
 ok $x.html-full-page ~~ /vimCodeElement/, 'from string';
 
 ok $x.html ~~ /vimCodeElement/, 'body';
-
 ok $x.css ~~ /background/, 'css';
 
-
+{
+    our $*VIM-LET= "set number";
+    my $y = Text::VimColour.new(:lang('perl6'), in => $in);
+    ok $y.html-full-page ~~ /LineNr/, '$*VIM-LET works';
+}
