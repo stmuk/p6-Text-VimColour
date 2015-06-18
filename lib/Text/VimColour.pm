@@ -24,8 +24,10 @@ class Text::VimColour:ver<0.2> {
 	LEAVE {
 	    $!lang //= 'c';
             my $vim-let = $*VIM-LET || "";
+        
+        %*ENV<EXRC>="set directory=/tmp";
 	    my $cmd = qq«
-		vim -T builtin_dumb -c 'set noswapfile|set bg=light|set ft=$!lang|{$vim-let}|TOhtml|wq! $!out|quit' $!in 2>/dev/null >/dev/null
+		vim -E -T builtin_dumb -c 'set noswapfile|set bg=light|set ft=$!lang|{$vim-let}|TOhtml|wq! $!out|quit' $!in 2>/dev/null >/dev/null
             »;
             my $proc = shell $cmd;
 	    fail "failed to run '$cmd', exit code {$proc.exitcode}" unless $proc.exitcode == 0;

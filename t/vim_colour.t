@@ -13,7 +13,7 @@ my $lang = 'perl6';
 my $in = 't/vim_colour.t';
 my $out = $?FILE.IO.dirname ~ $*SPEC.dir-sep ~ 'index.html';
 
-unlink $out if $out.IO.f;
+#unlink $out if $out.IO.f;
 
 Text::VimColour.new( :$lang, :$in, :$out ) ;
 ok $out.IO.e && slurp($out) ~~ /vimCodeElement/, 'found vimCodeElement';
