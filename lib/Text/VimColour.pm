@@ -27,7 +27,7 @@ class Text::VimColour:ver<0.3> {
         
         %*ENV<EXRC>="set directory=/tmp";
 	    my $cmd = qq«
-		vim -E -T builtin_dumb -c 'syntax on|set noswapfile|set bg=light|set ft=$!lang|{$vim-let}|TOhtml|wq! $!out|quit' $!in 2>/dev/null >/dev/null
+		vim -u NONE -E -T builtin_dumb -c 'syntax on|set noswapfile|set bg=light|set ft=$!lang|{$vim-let}|TOhtml|wq! $!out|quit' $!in 2>/dev/null >/dev/null
             »;
             my $proc = shell $cmd;
 	    fail "failed to run '$cmd', exit code {$proc.exitcode}" unless $proc.exitcode == 0;
