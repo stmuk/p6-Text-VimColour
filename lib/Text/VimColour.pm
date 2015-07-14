@@ -5,15 +5,10 @@ use File::Temp;
 class Text::VimColour:ver<0.3> {
     subset File of Str where -> $x { so $x && $x.IO.e };
     subset Path of Str where -> $x { so $x && $x.IO.dirname.IO.e } 
-    # BUG https://rt.perl.org/Public/Bug/Display.html?id=125245
-    # has Path  $!out;
-    # has File  $!in;
-    # has Str   $!lang;
-    has $!out;
-    has $!in;
-    has $!lang;
+    has Path  $!out;
+    has File  $!in;
+    has Str   $!lang;
     
-    my $html;
     proto method BUILD(|z) {
 	ENTER {
 	    my $version = .shift given split /','/, q:x/ex --version/;
