@@ -8,8 +8,10 @@ Pull requests welcome.
 
 ## Installation
 
-To install this module, you'll need `vim` version at least 7.4. You should
-also get updated
+To install this module, you'll need `vim` version at least 7.4. 
+
+An optimal step for the best syntax colouring results is to 
+also install updated
 [Perl 6 vim syntax files](https://github.com/vim-perl/vim-perl)
 
 ## Synopsis
