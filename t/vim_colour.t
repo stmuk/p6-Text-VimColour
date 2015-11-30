@@ -2,8 +2,7 @@
 
 use v6;
 
-BEGIN { @*INC.unshift( 'lib' ) }
-
+use lib 'lib';
 use Test;
 use Text::VimColour;
 
